@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-MODULENAME="helloworld"
+MODULENAME="foolbox"
 
 docker build -t ${MODULENAME} .
 
