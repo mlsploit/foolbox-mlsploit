@@ -1,9 +1,5 @@
-# Hello World module for MLsploit
+# Foolbox Attacks
 
-## Testing
+## Adversarial Machine Learning Attacks
 
-Add a dummy `input.json` file containing testing configuration to the `input` directory along with corresponding input files, and run the following command:
-
-```
-bash test.sh
-```
+Classical adversarial machine learning attacks from Foolbox
