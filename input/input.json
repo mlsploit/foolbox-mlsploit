@@ -1,0 +1,12 @@
+{
+  "name": "ADefAttack",
+  "options": {
+    "max_iter": 100,
+    "max_norm": "inf",
+    "smooth": 1.0,
+    "sumsample": 10
+  },
+  "num_files": 1,
+  "files": ["example.jpg"],
+  "tags": [{}]
+}

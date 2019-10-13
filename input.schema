@@ -1,0 +1,30 @@
+{
+    "functions": [
+        {
+            "name": "ADefAttack",
+            "options": [
+                {
+                    "name": "max_iter", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "max_norm", "type": "float",
+                    "default": "inf",
+                    "required": true
+                },
+                {
+                    "name": "smooth", "type": "float",
+                    "default": 1.0
+                },
+                {
+                  "name": "sumsample", "type": "int",
+                  "default": 10
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        }
+    ]
+}
