@@ -1,5 +1,8 @@
 from mlsploit import Job
 from PIL import Image
+import foolbox
+import inspect
+import tensorflow as tf
 
 # Initialize the job, which will
 # load and verify all input parameters
@@ -33,19 +36,16 @@ input_file_path = Job.input_files[0] # /mnt/input/image123.jpg
 image = Image.open(input_file_path)
 
 
-for name, item in inspect.getmembers(attacks):
-  if (inspect.isclass(item)
-      and item is not Attack
-      and issubclass(item, Attack)
-      and len(item.__abstractmethods__) == 0):
-    print(name) # ADefAttack, AdditiveGaussianNoiseAttack ...
-
+for name, item in inspect.getmembers(foolbox.attacks):
     if name == Job.function:
+        print (name)
         # perform attack here
-        attack_class = item
         #attack = attack_class(**Job.options)
-        attack = ADefAttack(max_iter=100, max_norm=np.inf, smooth=1.0, sumsample=10)
-        attacked_image = attack.attack(image)
+        #attack = ADefAttack(max_iter=100, max_norm=np.inf, smooth=1.0, sumsample=10)
+        #attacked_image = attack.attack(image)
+        attack  = foolbox.attacks.ADefAttack(item)
+        label = "hello"
+        adversarial = attack(image, label)
 
         output_image_filename = os.path.basename(input_file_path) # "image123.jpg"
         output_file_path = Job.make_output_filepath(output_image_filename) # /mnt/output/image123.jpg
