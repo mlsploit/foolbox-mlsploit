@@ -1,5 +1,5 @@
 from mlsploit import Job
-from Pillow import Image
+from PIL import Image
 
 # Initialize the job, which will
 # load and verify all input parameters
