@@ -1,5 +1,5 @@
 from mlsploit import Job
-
+from Pillow import Image
 
 # Initialize the job, which will
 # load and verify all input parameters
@@ -30,7 +30,7 @@ Job.options = {
 Job.input_files = ["/mnt/input/example.jpg"]
 
 input_file_path = Job.input_files[0] # /mnt/input/image123.jpg
-image = load(input_file_path)
+image = Image.open(input_file_path)
 
 
 for name, item in inspect.getmembers(attacks):

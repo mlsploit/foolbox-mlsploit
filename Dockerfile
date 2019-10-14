@@ -4,6 +4,7 @@ VOLUME /mnt/input
 VOLUME /mnt/output
 
 RUN pip install foolbox
+RUN pip install Pillow
 
 COPY . /app
 WORKDIR /app
