@@ -1,7 +1,7 @@
 from mlsploit import Job
 from PIL import Image
 import foolbox
-import inspect
+import inspectO
 import tensorflow as tf
 
 # Initialize the job, which will
@@ -9,25 +9,31 @@ import tensorflow as tf
 Job.initialize()
 
 Job.input_json = {
-  "name": "ADefAttack",
+  "name": "FGSM",
   "options": {
-    "max_iter": 100,
-    "max_norm": "inf",
-    "smooth": 1.0,
-    "sumsample": 10
+    "label": 0,
+    "unpack": false,
+    "epsilon": 1.0,
+    "stepsize": 1.0,
+    "iterations": 10,
+    "random_start": true,
+    "return_early": false
   },
   "num_files": 1,
   "files": ["example.jpg"],
   "tags": [{}]
 }
 
-Job.function = "ADefAttack"
+Job.function = "FGSM"
 
 Job.options = {
-    "max_iter": 100,
-    "max_norm": "inf",
-    "smooth": 1.0,
-    "sumsample": 10
+    "label": 0,
+    "unpack": false,
+    "epsilon": 1.0,
+    "stepsize": 1.0,
+    "iterations": 10,
+    "random_start": true,
+    "return_early": false
 }
 
 Job.input_files = ["/mnt/input/example.jpg"]
@@ -42,7 +48,7 @@ for name, item in inspect.getmembers(foolbox.attacks):
         # perform attack here
         #attack = attack_class(**Job.options)
         #attack = ADefAttack(max_iter=100, max_norm=np.inf, smooth=1.0, sumsample=10)
-        #attacked_image = attack.attack(image)
+        attacked_image = attack.attack(image)
         attack  = foolbox.attacks.ADefAttack(item)
         label = "hello"
         adversarial = attack(image, label)
