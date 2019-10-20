@@ -1,25 +1,21 @@
 {
     "functions": [
         {
-            "name": "ADefAttack",
+            "name": "FGSM",
             "options": [
                 {
-                    "name": "max_iter", "type": "int",
-                    "default": 100,
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
                     "required": true
                 },
                 {
-                    "name": "max_norm", "type": "float",
-                    "default": "inf",
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
                     "required": true
                 },
                 {
-                    "name": "smooth", "type": "float",
+                    "name": "max_epsilon", "type": "float",
                     "default": 1.0
-                },
-                {
-                  "name": "sumsample", "type": "int",
-                  "default": 10
                 }
             ],
             "extensions": [

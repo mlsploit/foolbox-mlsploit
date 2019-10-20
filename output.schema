@@ -1,7 +1,7 @@
 {
     "functions": [
         {
-            "name": "ADefAttack",
+            "name": "FGSM",
             "output_tags": [],
             "has_modified_files": true,
             "has_extra_files": false

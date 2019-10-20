@@ -1,13 +1,9 @@
 {
   "name": "FGSM",
   "options": {
-    "label": 0,
-    "unpack": false,
-    "epsilon": 1.0,
-    "stepsize": 1.0,
-    "iterations": 10,
-    "random_start": true,
-    "return_early": false
+    "model": "vgg16",
+    "epsilons": 100,
+    "max_epsilon": 16
   },
   "num_files": 1,
   "files": ["example.jpg"],

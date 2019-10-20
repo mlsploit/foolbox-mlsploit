@@ -1,65 +1,60 @@
+import os
+
 from mlsploit import Job
+import numpy as np
 from PIL import Image
 import foolbox
-import inspectO
-import tensorflow as tf
+import inspect
+
+from models import load_pretrained_model
 
 # Initialize the job, which will
 # load and verify all input parameters
 Job.initialize()
 
-Job.input_json = {
-  "name": "FGSM",
-  "options": {
-    "label": 0,
-    "unpack": false,
-    "epsilon": 1.0,
-    "stepsize": 1.0,
-    "iterations": 10,
-    "random_start": true,
-    "return_early": false
-  },
-  "num_files": 1,
-  "files": ["example.jpg"],
-  "tags": [{}]
-}
+attack_name = Job.function
+attack_options = dict(Job.options)
+model = load_pretrained_model(attack_options.pop('model')).eval()
+input_file_paths = list(map(lambda f: f.path, Job.input_files))
+input_file_path = input_file_paths[0]
+input_file_name = os.path.basename(input_file_path)
 
-Job.function = "FGSM"
+mean = np.array([0.485, 0.456, 0.406]).reshape((3, 1, 1))
+std = np.array([0.229, 0.224, 0.225]).reshape((3, 1, 1))
+fmodel = foolbox.models.PyTorchModel(
+  model,
+  bounds=(0, 1),
+  num_classes=1000,
+  preprocessing=(mean, std))
 
-Job.options = {
-    "label": 0,
-    "unpack": false,
-    "epsilon": 1.0,
-    "stepsize": 1.0,
-    "iterations": 10,
-    "random_start": true,
-    "return_early": false
-}
-
-Job.input_files = ["/mnt/input/example.jpg"]
-
-input_file_path = Job.input_files[0] # /mnt/input/image123.jpg
+image_size = 224
 image = Image.open(input_file_path)
+image = image.resize((image_size, image_size))
+image = np.array(image, dtype=np.float32)
+image = image.transpose([2, 0, 1])
+image = image / 255.
 
+label = np.argmax(fmodel.predictions(image))
+print('Original prediction:', label)
 
 for name, item in inspect.getmembers(foolbox.attacks):
     if name == Job.function:
-        print (name)
-        # perform attack here
-        #attack = attack_class(**Job.options)
-        #attack = ADefAttack(max_iter=100, max_norm=np.inf, smooth=1.0, sumsample=10)
-        attacked_image = attack.attack(image)
-        attack  = foolbox.attacks.ADefAttack(item)
-        label = "hello"
-        adversarial = attack(image, label)
+        attack_init = item
+        attack = attack_init(fmodel)
+        adversarial = attack(image[:,:,::-1], label, **attack_options)
 
-        output_image_filename = os.path.basename(input_file_path) # "image123.jpg"
-        output_file_path = Job.make_output_filepath(output_image_filename) # /mnt/output/image123.jpg
-        save(attacked_image, output_file_path)
+        label_attack = np.argmax(fmodel.predictions(adversarial))
+        print('Prediction after attack:', label_attack)
+
+        output_image = np.uint8(adversarial * 255.)
+        output_image = output_image.transpose([1, 2, 0])
+        output_image = Image.fromarray(output_image)
+
+        output_file_path = Job.make_output_filepath(input_file_name)
+        output_image.save(output_file_path)
         Job.add_output_file(
-            output_file_path, tags=None,
-            is_modified=True, is_extra=False)
-
+          output_file_path, is_modified=True)
         Job.commit_output()
+
     else:
         continue

@@ -1,13 +1,14 @@
-FROM python:3.6
+FROM pytorch/pytorch
 
 VOLUME /mnt/input
 VOLUME /mnt/output
 
-RUN pip install foolbox
-RUN pip install Pillow
-RUN pip install torch
-RUN pip install numpy
-RUN pip install torchvision.models
+# Install python dependencies
+RUN pip install Pillow numpy foolbox
+
+# Download pretrained weights
+ADD models.py /
+RUN python /models.py 
 
 COPY . /app
 WORKDIR /app
