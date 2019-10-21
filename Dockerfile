@@ -8,7 +8,7 @@ RUN pip install Pillow numpy foolbox
 
 # Download pretrained weights
 ADD models.py /
-RUN python /models.py 
+RUN python /models.py
 
 COPY . /app
 WORKDIR /app
