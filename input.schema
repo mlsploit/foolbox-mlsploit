@@ -1,6 +1,462 @@
 {
     "functions": [
         {
+            "name": "ADefAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "max_iter", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "max_norm", "type": "float",
+                    "default": inf,
+                    "required": true
+                },
+                {
+                    "name": "smooth", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                },
+                {
+                    "name": "subsample", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "AdditiveGaussianNoiseAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "AdditiveUniformNoiseAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "ApproximateLBFGSAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 1e-05,
+                    "required": true
+                },
+                {
+                    "name": "num_random_targets", "type": "int",
+                    "default": 0,
+                    "required": true
+                },
+                {
+                    "name": "maxiter", "type": "int",
+                    "default": 150,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "BIM",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.05,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "BasicIterativeMethod",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.05,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "BinarizationRefinementAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "starting_point", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                },
+                {
+                    "name": "threshold", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                },
+                {
+                    "name": "included_in", "type": "str",
+                    "default": "upper",
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "BlendedUniformNoiseAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                },
+                {
+                    "name": "max_directions", "type": "int",
+                    "default": 1000
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "BoundaryAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 5000,
+                    "required": true
+                },
+                {
+                    "name": "max_directions", "type": "int",
+                    "default": 25,
+                    "required": true
+                },
+                {
+                    "name": "starting_point", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                },
+                {
+                    "name": "initialization_attack", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                },
+                {
+                    "name": "log_every_n_steps", "type": "int",
+                    "default": 1,
+                    "required": true
+                },
+                {
+                    "name": "spherical_step", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "source_step", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "step_adaptation", "type": "float",
+                    "default": 1.5,
+                    "required": true
+                },
+                {
+                    "name": "batch_size", "type": "int",
+                    "default": 1,
+                    "required": true
+                },
+                {
+                    "name": "tune_batch_size", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "threaded_rnd", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "threaded_gen", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "alternative_generator", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "internal_dtype", "type": "type",
+                    "default": "numpy.float64",
+                    "required": true
+                },
+                {
+                    "name": "verbose", "type": "bool",
+                    "default": false,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "CarliniWagnerL2Attack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search_steps", "type": "int",
+                    "default": 5,
+                    "required": true
+                },
+                {
+                    "name": "max_iterations", "type": "int",
+                    "default": 1000,
+                    "required": true
+                },
+                {
+                    "name": "confidence", "type": "int",
+                    "default": 0,
+                    "required": true
+                },
+                {
+                    "name": "learning_rate", "type": "float",
+                    "default": 0.005,
+                    "required": true
+                },
+                {
+                    "name": "initial_const", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "abort_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "ContrastReductionAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "DeepFoolAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "steps", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "subsample", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "p", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "DeepFoolL2Attack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "steps", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "subsample", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "DeepFoolLinfinityAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "steps", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "subsample", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
             "name": "FGSM",
             "options": [
                 {
@@ -21,6 +477,841 @@
             "extensions": [
                 {"extension": "jpg"}
             ]
-        }
+        },
+        {
+            "name": "GaussianBlurAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "GradientAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                },
+                {
+                    "name": "max_epsilon", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "GradientSignAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 1000,
+                    "required": true
+                },
+                {
+                    "name": "max_epsilon", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "IterativeGradientAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "max_epsilon", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                },
+                {
+                    "name": "steps", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "IterativeGradientSignAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "max_epsilon", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                },
+                {
+                    "name": "steps", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "L1BasicIterativeAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.05,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "L2BasicIterativeAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.05,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "LBFGSAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 1e-05,
+                    "required": true
+                },
+                {
+                    "name": "num_random_targets", "type": "int",
+                    "default": 0,
+                    "required": true
+                },
+                {
+                    "name": "maxiter", "type": "int",
+                    "default": 150,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "LinfinityBasicIterativeAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.05,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "LocalSearchAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "r", "type": "float",
+                    "default": 1.5,
+                    "required": true
+                },
+                {
+                    "name": "p", "type": "float",
+                    "default": 10.0,
+                    "required": true
+                },
+                {
+                    "name": "d", "type": "int",
+                    "default": 5,
+                    "required": true
+                },
+                {
+                    "name": "t", "type": "int",
+                    "default": 5,
+                    "required": true
+                },
+                {
+                    "name": "R", "type": "int",
+                    "default": 150,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "MomentumIterativeAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.06,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "decay_factor", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "MomentumIterativeMethod",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.06,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "decay_factor", "type": "float",
+                    "default": 1.0,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "NewtonFoolAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "max_iter", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "eta", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "PGD",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "PointwiseAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "starting_point", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                },
+                {
+                    "name": "initialization_attack", "type": "NoneType",
+                    "default": None,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "PrecomputedImagesAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "ProjectedGradientDescent",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "ProjectedGradientDescentAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "RandomPGD",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "RandomProjectedGradientDescent",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "RandomProjectedGradientDescentAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "binary_search", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "epsilon", "type": "float",
+                    "default": 0.3,
+                    "required": true
+                },
+                {
+                    "name": "stepsize", "type": "float",
+                    "default": 0.01,
+                    "required": true
+                },
+                {
+                    "name": "iterations", "type": "int",
+                    "default": 40,
+                    "required": true
+                },
+                {
+                    "name": "random_start", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "return_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "SLSQPAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "SaltAndPepperNoiseAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "epsilons", "type": "int",
+                    "default": 100,
+                    "required": true
+                },
+                {
+                    "name": "repetitions", "type": "int",
+                    "default": 10,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "SinglePixelAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "max_pixels", "type": "int",
+                    "default": 1000,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
+        {
+            "name": "SpatialAttack",
+            "options": [
+                {
+                    "name": "model", "type": "str",
+                    "default": "vgg16",
+                    "required": true
+                },
+                {
+                    "name": "do_rotations", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "do_translations", "type": "bool",
+                    "default": true,
+                    "required": true
+                },
+                {
+                    "name": "x_shift_limits", "type": "tuple",
+                    "default": (-5,5),
+                    "required": true
+                },
+                {
+                    "name": "y_shift_limits", "type": "tuple",
+                    "default": (-5,5),
+                    "required": true
+                },
+                {
+                    "name": "angular_limits", "type": "tuple",
+                    "default": (-5,5),
+                    "required": true
+                },
+                {
+                    "name": "granularity", "type": "int",
+                    "default": 10,
+                    "required": true
+                },
+                {
+                    "name": "random_sampling", "type": "bool",
+                    "default": false,
+                    "required": true
+                },
+                {
+                    "name": "abort_early", "type": "bool",
+                    "default": true,
+                    "required": true
+                }
+            ],
+            "extensions": [
+                {"extension": "jpg"}
+            ]
+        },
     ]
 }
