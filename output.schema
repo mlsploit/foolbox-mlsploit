@@ -1,13 +1,169 @@
 {
-    "functions": [
+  "functions": [
+    {
+      "name": "BasicIterativeMethod",
+      "output_tags": [
         {
-            "name": "FGSM",
-            "output_tags": [
-                {"name": "mlsploit-visualize", "type": "str"},
-                {"name": "label", "type": "str"}
-            ],
-            "has_modified_files": true,
-            "has_extra_files": false
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
         }
-    ]
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "CarliniWagnerL2Attack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "DeepFoolL2Attack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "DeepFoolLinfinityAttack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "FGSM",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "IterativeGradientSignAttack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "LBFGSAttack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "ProjectedGradientDescent",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "RandomProjectedGradientDescent",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "SaltAndPepperNoiseAttack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    },
+    {
+      "name": "SinglePixelAttack",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": true,
+      "has_extra_files": false
+    }
+  ]
 }

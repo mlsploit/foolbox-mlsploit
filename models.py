@@ -1,7 +1,7 @@
 import torchvision.models as models
 
 
-ALLOWED_MODELS = {'vgg16', 'resnet18'}
+ALLOWED_MODELS = ['vgg16', 'resnet18']
 
 
 def load_pretrained_model(model_name):

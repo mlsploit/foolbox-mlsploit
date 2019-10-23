@@ -1,26 +1,447 @@
 {
-    "functions": [
+  "functions": [
+    {
+      "name": "BasicIterativeMethod",
+      "extensions": [
         {
-            "name": "FGSM",
-            "options": [
-                {
-                    "name": "model", "type": "str",
-                    "default": "vgg16",
-                    "required": true
-                },
-                {
-                    "name": "epsilons", "type": "int",
-                    "default": 1000,
-                    "required": true
-                },
-                {
-                    "name": "max_epsilon", "type": "float",
-                    "default": 1.0
-                }
-            ],
-            "extensions": [
-                {"extension": "jpg"}
-            ]
+          "extension": "jpg"
         }
-    ]
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "binary_search",
+          "type": "bool",
+          "default": true,
+          "required": true
+        },
+        {
+          "name": "epsilon",
+          "type": "float",
+          "default": 0.3,
+          "required": true
+        },
+        {
+          "name": "stepsize",
+          "type": "float",
+          "default": 0.05,
+          "required": true
+        },
+        {
+          "name": "iterations",
+          "type": "int",
+          "default": 10,
+          "required": true
+        },
+        {
+          "name": "random_start",
+          "type": "bool",
+          "default": false,
+          "required": true
+        },
+        {
+          "name": "return_early",
+          "type": "bool",
+          "default": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "CarliniWagnerL2Attack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "binary_search_steps",
+          "type": "int",
+          "default": 5,
+          "required": true
+        },
+        {
+          "name": "max_iterations",
+          "type": "int",
+          "default": 1000,
+          "required": true
+        },
+        {
+          "name": "confidence",
+          "type": "int",
+          "default": 0,
+          "required": true
+        },
+        {
+          "name": "learning_rate",
+          "type": "float",
+          "default": 0.005,
+          "required": true
+        },
+        {
+          "name": "initial_const",
+          "type": "float",
+          "default": 0.01,
+          "required": true
+        },
+        {
+          "name": "abort_early",
+          "type": "bool",
+          "default": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "DeepFoolL2Attack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "steps",
+          "type": "int",
+          "default": 100,
+          "required": true
+        },
+        {
+          "name": "subsample",
+          "type": "int",
+          "default": 10,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "DeepFoolLinfinityAttack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "steps",
+          "type": "int",
+          "default": 100,
+          "required": true
+        },
+        {
+          "name": "subsample",
+          "type": "int",
+          "default": 10,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "FGSM",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "epsilons",
+          "type": "int",
+          "default": 1000,
+          "required": true
+        },
+        {
+          "name": "max_epsilon",
+          "type": "int",
+          "default": 1,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "IterativeGradientSignAttack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "epsilons",
+          "type": "int",
+          "default": 100,
+          "required": true
+        },
+        {
+          "name": "max_epsilon",
+          "type": "int",
+          "default": 1,
+          "required": true
+        },
+        {
+          "name": "steps",
+          "type": "int",
+          "default": 10,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "LBFGSAttack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "epsilon",
+          "type": "float",
+          "default": 1e-05,
+          "required": true
+        },
+        {
+          "name": "num_random_targets",
+          "type": "int",
+          "default": 0,
+          "required": true
+        },
+        {
+          "name": "maxiter",
+          "type": "int",
+          "default": 150,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "ProjectedGradientDescent",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "binary_search",
+          "type": "bool",
+          "default": true,
+          "required": true
+        },
+        {
+          "name": "epsilon",
+          "type": "float",
+          "default": 0.3,
+          "required": true
+        },
+        {
+          "name": "stepsize",
+          "type": "float",
+          "default": 0.01,
+          "required": true
+        },
+        {
+          "name": "iterations",
+          "type": "int",
+          "default": 40,
+          "required": true
+        },
+        {
+          "name": "random_start",
+          "type": "bool",
+          "default": false,
+          "required": true
+        },
+        {
+          "name": "return_early",
+          "type": "bool",
+          "default": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "RandomProjectedGradientDescent",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "binary_search",
+          "type": "bool",
+          "default": true,
+          "required": true
+        },
+        {
+          "name": "epsilon",
+          "type": "float",
+          "default": 0.3,
+          "required": true
+        },
+        {
+          "name": "stepsize",
+          "type": "float",
+          "default": 0.01,
+          "required": true
+        },
+        {
+          "name": "iterations",
+          "type": "int",
+          "default": 40,
+          "required": true
+        },
+        {
+          "name": "random_start",
+          "type": "bool",
+          "default": true,
+          "required": true
+        },
+        {
+          "name": "return_early",
+          "type": "bool",
+          "default": true,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "SaltAndPepperNoiseAttack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "epsilons",
+          "type": "int",
+          "default": 100,
+          "required": true
+        },
+        {
+          "name": "repetitions",
+          "type": "int",
+          "default": 10,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "SinglePixelAttack",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true
+        },
+        {
+          "name": "max_pixels",
+          "type": "int",
+          "default": 1000,
+          "required": true
+        }
+      ]
+    }
+  ]
 }
