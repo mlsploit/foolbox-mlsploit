@@ -3,8 +3,6 @@ from __future__ import print_function
 import json
 import os
 
-import torchvision.models as models
-
 
 INPUT_DIR = '/mnt/input'
 OUTPUT_DIR = '/mnt/output'
