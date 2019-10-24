@@ -45,7 +45,7 @@ for name, item in inspect.getmembers(foolbox.attacks):
     if name == Job.function:
         attack_init = item
         attack = attack_init(fmodel)
-        adversarial = attack(image[:,:,::-1], label, **attack_options)
+        adversarial = attack(image, label, **attack_options)
 
         label_attack = np.argmax(fmodel.predictions(adversarial))
         label_attack = get_label_for_imagenet_class(label_attack)
