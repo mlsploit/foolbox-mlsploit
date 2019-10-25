@@ -5,7 +5,7 @@ import json
 from foolbox import attacks
 from foolbox.attacks.base import Attack
 
-import torchvision.models as models
+from foolboxdocs import docs
 from models import ALLOWED_MODELS
 
 ALLOWED_OPTION_TYPES = ['str', 'float', 'int', 'bool']
@@ -22,6 +22,8 @@ ALLOWED_ATTACKS = [
   'SaltAndPepperNoiseAttack',
   'SinglePixelAttack']
 
+DOCTXT = 'doctxt'
+
 def _get_signature(attack_class):
   parameters = list()
 
@@ -33,22 +35,34 @@ def _get_signature(attack_class):
   return parameters
 
 
+def _process_doctxt(doctxt):
+  doctxt = doctxt.strip()
+  doctxt = doctxt.strip('\n')
+  doctxt = doctxt.strip()
+  return doctxt
+
+
 def main():
+
   input_schema = {'functions': []}
   output_schema = {'functions': []}
-  
+
+  if DOCTXT in docs:
+    input_schema[DOCTXT] = _process_doctxt(docs[DOCTXT])
+  adocs = docs['attacks']
+
   for name, item in inspect.getmembers(attacks):
     if (inspect.isclass(item)
         and item is not Attack
         and issubclass(item, Attack)
         and len(item.__abstractmethods__) == 0
         and name in ALLOWED_ATTACKS):
-      
+
       fn_input_schema = {
         'name': name,
         'extensions': [
           {'extension': 'jpg'}]}
-      
+
       fn_output_schema = {
         'name': name,
         'output_tags': [
@@ -56,30 +70,42 @@ def main():
           {'name': 'label', 'type': 'str'}],
         'has_modified_files': True,
         'has_extra_files': False}
-      
+
+      if name in adocs and DOCTXT in adocs[name]:
+        fn_input_schema[DOCTXT] = \
+          _process_doctxt(adocs[name][DOCTXT])
+
       options = []
       options.append({
-        'name': 'model', 
+        'name': 'model',
         'type': 'enum',
         'values': ALLOWED_MODELS,
-        'required': True})
-      
-      for (option_name, 
-           option_type, 
+        'required': True,
+        'doctxt': 'Pre-trained model to be attacked.'})
+
+      for (option_name,
+           option_type,
            option_default) in _get_signature(item):
 
         option_type = option_type.__name__
         if option_type in ALLOWED_OPTION_TYPES:
-          options.append({
-            'name': option_name, 
+          opt = {
+            'name': option_name,
             'type': option_type,
             'default': option_default,
-            'required': True})
-      fn_input_schema['options'] = options
+            'required': True}
 
+          if (name in adocs
+              and option_name in adocs[name]['parameters']):
+                opt[DOCTXT] = \
+                  adocs[name]['parameters'][option_name][DOCTXT]
+
+          options.append(opt)
+
+      fn_input_schema['options'] = options
       input_schema['functions'].append(fn_input_schema)
       output_schema['functions'].append(fn_output_schema)
-  
+
   with open('input.schema', 'w') as f:
     json.dump(input_schema, f, indent=2)
 
