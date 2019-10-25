@@ -57,6 +57,32 @@ Whether an individual gradient descent run should stop as soon as an adversarial
 """)
 }
 
+##################################################
+
+docs['attacks']['CarliniWagnerL2Attack'] = {}
+docs['attacks']['CarliniWagnerL2Attack']['doctxt'] = (
+"""
+The L2 version of the Carlini & Wagner attack.
+
+This attack is described in [1]. This implementation is based on the reference implementation by Carlini [2]. For bounds ≠ (0, 1), it differs from [2] because we normalize the squared L2 loss with the bounds.
+
+References
+[1]	Nicholas Carlini, David Wagner: “Towards Evaluating the Robustness of Neural Networks”, https://arxiv.org/abs/1608.04644
+[2]	(1, 2) https://github.com/carlini/nn_robust_attacks
+""")
+docs['attacks']['CarliniWagnerL2Attack']['parameters'] = {}
+docs['attacks']['CarliniWagnerL2Attack']['parameters']['binary_search_steps'] = {
+  'doctxt': (
+"""
+The number of steps for the binary search used to find the optimal tradeoff-constant between distance and confidence.
+""")
+}
+docs['attacks']['CarliniWagnerL2Attack']['parameters']['max_iterations'] = {
+  'doctxt': (
+"""
+The maximum number of iterations. Larger values are more accurate; setting it too small will require a large learning rate and will produce poor results.
+""")
+}
 
 if __name__ == '__main__':
     print(json.dumps(docs))

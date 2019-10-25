@@ -70,6 +70,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "The L2 version of the Carlini & Wagner attack.\n\nThis attack is described in [1]. This implementation is based on the reference implementation by Carlini [2]. For bounds \u2260 (0, 1), it differs from [2] because we normalize the squared L2 loss with the bounds.\n\nReferences\n[1]\tNicholas Carlini, David Wagner: \u201cTowards Evaluating the Robustness of Neural Networks\u201d, https://arxiv.org/abs/1608.04644\n[2]\t(1, 2) https://github.com/carlini/nn_robust_attacks",
       "options": [
         {
           "name": "model",
@@ -85,13 +86,15 @@
           "name": "binary_search_steps",
           "type": "int",
           "default": 5,
-          "required": true
+          "required": true,
+          "doctxt": "\nThe number of steps for the binary search used to find the optimal tradeoff-constant between distance and confidence.\n"
         },
         {
           "name": "max_iterations",
           "type": "int",
           "default": 1000,
-          "required": true
+          "required": true,
+          "doctxt": "\nThe maximum number of iterations. Larger values are more accurate; setting it too small will require a large learning rate and will produce poor results.\n"
         },
         {
           "name": "confidence",
