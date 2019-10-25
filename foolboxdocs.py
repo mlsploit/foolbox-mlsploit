@@ -2,7 +2,8 @@ import json
 
 
 docs = {}
-docs['doctxt'] = 'Foolbox module doctx here...'
+docs['tagline'] = 'Fool neural networks!'
+docs['doctxt'] = 'Foolbox is a Python toolbox to create adversarial examples that fool neural networks.'
 docs['attacks'] = {}
 
 

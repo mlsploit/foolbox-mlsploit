@@ -23,6 +23,7 @@ ALLOWED_ATTACKS = [
   'SinglePixelAttack']
 
 DOCTXT = 'doctxt'
+TAGLINE = 'tagline'
 
 def _get_signature(attack_class):
   parameters = list()
@@ -49,6 +50,8 @@ def main():
 
   if DOCTXT in docs:
     input_schema[DOCTXT] = _process_doctxt(docs[DOCTXT])
+  if TAGLINE in docs:
+    input_schema[TAGLINE] = docs[TAGLINE]
   adocs = docs['attacks']
 
   for name, item in inspect.getmembers(attacks):

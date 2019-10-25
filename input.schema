@@ -7,6 +7,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "The Basic Iterative Method introduced in [1].\n\nThis attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.\n\nReferences\n[1] Alexey Kurakin, Ian Goodfellow, Samy Bengio, \"Adversarial examples in the physical world\", https://arxiv.org/abs/1607.02533",
       "options": [
         {
           "name": "model",
@@ -15,43 +16,50 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "binary_search",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "\nWhether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized.\n"
         },
         {
           "name": "epsilon",
           "type": "float",
           "default": 0.3,
-          "required": true
+          "required": true,
+          "doctxt": "\nLimit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted.\n"
         },
         {
           "name": "stepsize",
           "type": "float",
           "default": 0.05,
-          "required": true
+          "required": true,
+          "doctxt": "\nStep size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted.\n"
         },
         {
           "name": "iterations",
           "type": "int",
           "default": 10,
-          "required": true
+          "required": true,
+          "doctxt": "\nNumber of iterations for each gradient descent run.\n"
         },
         {
           "name": "random_start",
           "type": "bool",
           "default": false,
-          "required": true
+          "required": true,
+          "doctxt": "\nStart the attack from a random point rather than from the original input.\n"
         },
         {
           "name": "return_early",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "\nWhether an individual gradient descent run should stop as soon as an adversarial is found.\n"
         }
       ]
     },
@@ -70,7 +78,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "binary_search_steps",
@@ -125,7 +134,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "steps",
@@ -156,7 +166,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "steps",
@@ -187,7 +198,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "epsilons",
@@ -218,7 +230,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "epsilons",
@@ -255,7 +268,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "epsilon",
@@ -292,7 +306,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "binary_search",
@@ -347,7 +362,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "binary_search",
@@ -402,7 +418,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "epsilons",
@@ -433,7 +450,8 @@
             "vgg16",
             "resnet18"
           ],
-          "required": true
+          "required": true,
+          "doctxt": "Pre-trained model to be attacked."
         },
         {
           "name": "max_pixels",
@@ -443,5 +461,7 @@
         }
       ]
     }
-  ]
+  ],
+  "doctxt": "Foolbox is a Python toolbox to create adversarial examples that fool neural networks.",
+  "tagline": "Fool neural networks!"
 }
