@@ -1,2 +1,2 @@
-foolbox
+foolbox==1.8.0
 torchvision
