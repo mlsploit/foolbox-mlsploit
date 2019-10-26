@@ -1,7 +1,7 @@
 {
   "functions": [
     {
-      "name": "classify",
+      "name": "Classify",
       "extensions": [
         {
           "extension": "jpg"

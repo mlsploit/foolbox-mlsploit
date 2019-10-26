@@ -42,7 +42,7 @@ def _process_doctxt(doctxt):
 
 
 def _get_classify_schema():
-  name = 'classify'
+  name = 'Classify'
 
   fn_input_schema = {
     'name': name,

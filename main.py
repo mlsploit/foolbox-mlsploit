@@ -41,7 +41,7 @@ image = image / 255.
 label = np.argmax(fmodel.predictions(image))
 print('Original prediction:', get_label_for_imagenet_class(label))
 
-if attack_name == 'classify':
+if attack_name == 'Classify':
     output_image = original_image
     output_file_path = Job.make_output_filepath(input_file_name)
     output_image.save(output_file_path)

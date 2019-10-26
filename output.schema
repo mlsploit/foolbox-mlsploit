@@ -1,7 +1,7 @@
 {
   "functions": [
     {
-      "name": "classify",
+      "name": "Classify",
       "output_tags": [
         {
           "name": "mlsploit-visualize",
