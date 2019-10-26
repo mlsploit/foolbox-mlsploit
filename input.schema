@@ -1,6 +1,27 @@
 {
   "functions": [
     {
+      "name": "classify",
+      "extensions": [
+        {
+          "extension": "jpg"
+        }
+      ],
+      "doctxt": "This simply classifies the image using the specified model, no attack here.",
+      "options": [
+        {
+          "name": "model",
+          "type": "enum",
+          "values": [
+            "vgg16",
+            "resnet18"
+          ],
+          "required": true,
+          "doctxt": "Pre-trained model to use for classification."
+        }
+      ]
+    },
+    {
       "name": "BasicIterativeMethod",
       "extensions": [
         {

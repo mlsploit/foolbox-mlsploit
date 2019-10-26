@@ -1,6 +1,21 @@
 {
   "functions": [
     {
+      "name": "classify",
+      "output_tags": [
+        {
+          "name": "mlsploit-visualize",
+          "type": "str"
+        },
+        {
+          "name": "label",
+          "type": "str"
+        }
+      ],
+      "has_modified_files": false,
+      "has_extra_files": false
+    },
+    {
       "name": "BasicIterativeMethod",
       "output_tags": [
         {

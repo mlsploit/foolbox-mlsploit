@@ -32,8 +32,8 @@ fmodel = foolbox.models.PyTorchModel(
   preprocessing=(mean, std))
 
 image_size = 224
-image = Image.open(input_file_path)
-image = image.resize((image_size, image_size))
+original_image = Image.open(input_file_path)
+image = original_image.resize((image_size, image_size))
 image = np.array(image, dtype=np.float32)
 image = image.transpose([2, 0, 1])
 image = image / 255.
@@ -41,28 +41,40 @@ image = image / 255.
 label = np.argmax(fmodel.predictions(image))
 print('Original prediction:', get_label_for_imagenet_class(label))
 
-for name, item in inspect.getmembers(foolbox.attacks):
-    if name == Job.function:
-        attack_init = item
-        attack = attack_init(fmodel)
-        adversarial = attack(image, label, **attack_options)
+if attack_name == 'classify':
+    output_image = original_image
+    output_file_path = Job.make_output_filepath(input_file_name)
+    output_image.save(output_file_path)
+    Job.add_output_file(
+        output_file_path,
+        tags={
+        'label': label,
+        'mlsploit-visualize': 'image'})
+    Job.commit_output()
 
-        label_attack = np.argmax(fmodel.predictions(adversarial))
-        label_attack = get_label_for_imagenet_class(label_attack)
-        print('Prediction after attack:', label_attack)
+else:
+    for name, item in inspect.getmembers(foolbox.attacks):
+        if name == Job.function:
+            attack_init = item
+            attack = attack_init(fmodel)
+            adversarial = attack(image, label, **attack_options)
 
-        output_image = np.uint8(adversarial * 255.)
-        output_image = output_image.transpose([1, 2, 0])
-        output_image = Image.fromarray(output_image)
+            label_attack = np.argmax(fmodel.predictions(adversarial))
+            label_attack = get_label_for_imagenet_class(label_attack)
+            print('Prediction after attack:', label_attack)
 
-        output_file_path = Job.make_output_filepath(input_file_name)
-        output_image.save(output_file_path)
-        Job.add_output_file(
-          output_file_path, is_modified=True,
-          tags={
-            'label': label_attack,
-            'mlsploit-visualize': 'image'})
-        Job.commit_output()
+            output_image = np.uint8(adversarial * 255.)
+            output_image = output_image.transpose([1, 2, 0])
+            output_image = Image.fromarray(output_image)
 
-    else:
-        continue
+            output_file_path = Job.make_output_filepath(input_file_name)
+            output_image.save(output_file_path)
+            Job.add_output_file(
+            output_file_path, is_modified=True,
+            tags={
+                'label': label_attack,
+                'mlsploit-visualize': 'image'})
+            Job.commit_output()
+
+        else:
+            continue

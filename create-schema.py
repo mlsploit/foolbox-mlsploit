@@ -22,6 +22,7 @@ ALLOWED_ATTACKS = [
 DOCTXT = 'doctxt'
 TAGLINE = 'tagline'
 
+
 def _get_signature(attack_class):
   parameters = list()
 
@@ -40,10 +41,40 @@ def _process_doctxt(doctxt):
   return doctxt
 
 
+def _get_classify_schema():
+  name = 'classify'
+
+  fn_input_schema = {
+    'name': name,
+    'extensions': [
+      {'extension': 'jpg'}],
+    'doctxt': 'This simply classifies the image using the specified model, no attack here.',
+    'options': [{
+        'name': 'model',
+        'type': 'enum',
+        'values': ALLOWED_MODELS,
+        'required': True,
+        'doctxt': 'Pre-trained model to use for classification.'}]}
+
+  fn_output_schema = {
+    'name': name,
+    'output_tags': [
+      {'name': 'mlsploit-visualize', 'type': 'str'},
+      {'name': 'label', 'type': 'str'}],
+    'has_modified_files': False,
+    'has_extra_files': False}
+
+  return fn_input_schema, fn_output_schema
+
+
 def main():
 
   input_schema = {'functions': []}
   output_schema = {'functions': []}
+
+  clf_ism, clf_osm = _get_classify_schema()
+  input_schema['functions'].append(clf_ism)
+  output_schema['functions'].append(clf_osm)
 
   if DOCTXT in docs:
     input_schema[DOCTXT] = _process_doctxt(docs[DOCTXT])
