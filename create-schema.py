@@ -13,12 +13,9 @@ ALLOWED_ATTACKS = [
   'BasicIterativeMethod',
   'CarliniWagnerL2Attack',
   'DeepFoolL2Attack',
-  'DeepFoolLinfinityAttack',
   'FGSM',
   'IterativeGradientSignAttack',
-  'LBFGSAttack',
   'ProjectedGradientDescent',
-  'RandomProjectedGradientDescent',
   'SaltAndPepperNoiseAttack',
   'SinglePixelAttack']
 

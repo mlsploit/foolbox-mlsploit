@@ -167,46 +167,24 @@ Lp-norm that should be minimzed, must be 2 or np.inf.
 docs['attacks']['FGSM'] = {}
 docs['attacks']['FGSM']['doctxt'] = (
 """
-The Basic Iterative Method introduced in [1].
-This attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.
+Adds the sign of the gradient to the input, gradually increasing the magnitude until the input is misclassified. This attack is often referred to as Fast Gradient Sign Method and was introduced in [1].
+
+Does not do anything if the model does not have a gradient.
+
 References
-[1]	Alexey Kurakin, Ian Goodfellow, Samy Bengio, "Adversarial examples in the physical world", https://arxiv.org/abs/1607.02533
+[1]	Ian J. Goodfellow, Jonathon Shlens, Christian Szegedy, “Explaining and Harnessing Adversarial Examples”, https://arxiv.org/abs/1412.6572
 """)
 docs['attacks']['FGSM']['parameters'] = {}
-docs['attacks']['FGSM']['parameters']['binary_search'] = {
+docs['attacks']['FGSM']['parameters']['epsilons'] = {
   'doctxt': (
 """
-Whether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized. Can also be an integer, specifying the number of binary search steps (default 20).
+Number of step sizes between 0 and max_epsilon that should be tried.
 """)
 }
-docs['attacks']['FGSM']['parameters']['epsilon'] = {
+docs['attacks']['FGSM']['parameters']['max_epsilon'] = {
   'doctxt': (
 """
-Limit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted.
-""")
-}
-docs['attacks']['FGSM']['parameters']['stepsize'] = {
-  'doctxt': (
-"""
-Step size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted.
-""")
-}
-docs['attacks']['FGSM']['parameters']['iterations'] = {
-  'doctxt': (
-"""
-Number of iterations for each gradient descent run.
-""")
-}
-docs['attacks']['FGSM']['parameters']['random_start'] = {
-  'doctxt': (
-"""
-Start the attack from a random point rather than from the original input.
-""")
-}
-docs['attacks']['FGSM']['parameters']['return_early'] = {
-  'doctxt': (
-"""
-Whether an individual gradient descent run should stop as soon as an adversarial is found.
+Largest step size.
 """)
 }
 

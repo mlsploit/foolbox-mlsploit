@@ -162,48 +162,13 @@
       ]
     },
     {
-      "name": "DeepFoolLinfinityAttack",
-      "extensions": [
-        {
-          "extension": "jpg"
-        }
-      ],
-      "doctxt": "Simple and close to optimal gradient-based adversarial attack.",
-      "options": [
-        {
-          "name": "model",
-          "type": "enum",
-          "values": [
-            "vgg16",
-            "resnet18"
-          ],
-          "required": true,
-          "doctxt": "Pre-trained model to be attacked."
-        },
-        {
-          "name": "steps",
-          "type": "int",
-          "default": 100,
-          "required": true,
-          "doctxt": "Maximum number of steps to perform."
-        },
-        {
-          "name": "subsample",
-          "type": "int",
-          "default": 10,
-          "required": true,
-          "doctxt": "Limit on the number of the most likely classes that should be considered. A small value is usually sufficient and much faster."
-        }
-      ]
-    },
-    {
       "name": "FGSM",
       "extensions": [
         {
           "extension": "jpg"
         }
       ],
-      "doctxt": "The Basic Iterative Method introduced in [1].\nThis attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.\nReferences\n[1]\tAlexey Kurakin, Ian Goodfellow, Samy Bengio, \"Adversarial examples in the physical world\", https://arxiv.org/abs/1607.02533",
+      "doctxt": "Adds the sign of the gradient to the input, gradually increasing the magnitude until the input is misclassified. This attack is often referred to as Fast Gradient Sign Method and was introduced in [1].\n\nDoes not do anything if the model does not have a gradient.\n\nReferences\n[1]\tIan J. Goodfellow, Jonathon Shlens, Christian Szegedy, \u201cExplaining and Harnessing Adversarial Examples\u201d, https://arxiv.org/abs/1412.6572",
       "options": [
         {
           "name": "model",
@@ -219,13 +184,15 @@
           "name": "epsilons",
           "type": "int",
           "default": 1000,
-          "required": true
+          "required": true,
+          "doctxt": "Number of step sizes between 0 and max_epsilon that should be tried."
         },
         {
           "name": "max_epsilon",
           "type": "int",
           "default": 1,
-          "required": true
+          "required": true,
+          "doctxt": "Largest step size."
         }
       ]
     },
@@ -268,45 +235,6 @@
           "default": 10,
           "required": true,
           "doctxt": "Number of iterations to run."
-        }
-      ]
-    },
-    {
-      "name": "LBFGSAttack",
-      "extensions": [
-        {
-          "extension": "jpg"
-        }
-      ],
-      "doctxt": "Perturbs the input with the gradient of the loss w.r.t. the input, gradually increasing the magnitude until the input is misclassified.\nDoes not do anything if the model does not have a gradient.",
-      "options": [
-        {
-          "name": "model",
-          "type": "enum",
-          "values": [
-            "vgg16",
-            "resnet18"
-          ],
-          "required": true,
-          "doctxt": "Pre-trained model to be attacked."
-        },
-        {
-          "name": "epsilon",
-          "type": "float",
-          "default": 1e-05,
-          "required": true
-        },
-        {
-          "name": "num_random_targets",
-          "type": "int",
-          "default": 0,
-          "required": true
-        },
-        {
-          "name": "maxiter",
-          "type": "int",
-          "default": 150,
-          "required": true
         }
       ]
     },
@@ -361,69 +289,6 @@
           "name": "random_start",
           "type": "bool",
           "default": false,
-          "required": true,
-          "doctxt": "Start the attack from a random point rather than from the original input."
-        },
-        {
-          "name": "return_early",
-          "type": "bool",
-          "default": true,
-          "required": true,
-          "doctxt": "Whether an individual gradient descent run should stop as soon as an adversarial is found."
-        }
-      ]
-    },
-    {
-      "name": "RandomProjectedGradientDescent",
-      "extensions": [
-        {
-          "extension": "jpg"
-        }
-      ],
-      "doctxt": "The Random Projected Gradient Descent introduced in [1] with random start.\n\nReferences\n[1]\tAleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu,\n\"Towards Deep Learning Models Resistant to Adversarial Attacks\", https://arxiv.org/abs/1706.06083",
-      "options": [
-        {
-          "name": "model",
-          "type": "enum",
-          "values": [
-            "vgg16",
-            "resnet18"
-          ],
-          "required": true,
-          "doctxt": "Pre-trained model to be attacked."
-        },
-        {
-          "name": "binary_search",
-          "type": "bool",
-          "default": true,
-          "required": true,
-          "doctxt": "Whether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized. Can also be an integer, specifying the number of binary search steps (default 20)."
-        },
-        {
-          "name": "epsilon",
-          "type": "float",
-          "default": 0.3,
-          "required": true,
-          "doctxt": "Limit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted."
-        },
-        {
-          "name": "stepsize",
-          "type": "float",
-          "default": 0.01,
-          "required": true,
-          "doctxt": "Step size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted."
-        },
-        {
-          "name": "iterations",
-          "type": "int",
-          "default": 40,
-          "required": true,
-          "doctxt": "Number of iterations for each gradient descent run."
-        },
-        {
-          "name": "random_start",
-          "type": "bool",
-          "default": true,
           "required": true,
           "doctxt": "Start the attack from a random point rather than from the original input."
         },
