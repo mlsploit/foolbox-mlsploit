@@ -48,7 +48,7 @@ if attack_name == 'Classify':
     output_file_path = Job.make_output_filepath(input_file_name)
     output_image.save(output_file_path)
     Job.add_output_file(
-        output_file_path,
+        output_file_path, is_modified=True,
         tags={'label': label,
               'mlsploit-visualize': 'image'})
     Job.commit_output()

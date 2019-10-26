@@ -61,7 +61,7 @@ def _get_classify_schema():
     'output_tags': [
       {'name': 'mlsploit-visualize', 'type': 'str'},
       {'name': 'label', 'type': 'str'}],
-    'has_modified_files': False,
+    'has_modified_files': True,
     'has_extra_files': False}
 
   return fn_input_schema, fn_output_schema

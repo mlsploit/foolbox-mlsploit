@@ -12,7 +12,7 @@
           "type": "str"
         }
       ],
-      "has_modified_files": false,
+      "has_modified_files": true,
       "has_extra_files": false
     },
     {
