@@ -42,14 +42,15 @@ label = np.argmax(fmodel.predictions(image))
 print('Original prediction:', get_label_for_imagenet_class(label))
 
 if attack_name == 'Classify':
+    label = get_label_for_imagenet_class(label)
+
     output_image = original_image
     output_file_path = Job.make_output_filepath(input_file_name)
     output_image.save(output_file_path)
     Job.add_output_file(
         output_file_path,
-        tags={
-        'label': label,
-        'mlsploit-visualize': 'image'})
+        tags={'label': label,
+              'mlsploit-visualize': 'image'})
     Job.commit_output()
 
 else:
@@ -71,9 +72,8 @@ else:
             output_image.save(output_file_path)
             Job.add_output_file(
             output_file_path, is_modified=True,
-            tags={
-                'label': label_attack,
-                'mlsploit-visualize': 'image'})
+            tags={'label': label_attack,
+                  'mlsploit-visualize': 'image'})
             Job.commit_output()
 
         else:
