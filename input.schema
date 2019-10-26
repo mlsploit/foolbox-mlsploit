@@ -24,42 +24,42 @@
           "type": "bool",
           "default": true,
           "required": true,
-          "doctxt": "\nWhether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized.\n"
+          "doctxt": "Whether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized."
         },
         {
           "name": "epsilon",
           "type": "float",
           "default": 0.3,
           "required": true,
-          "doctxt": "\nLimit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted.\n"
+          "doctxt": "Limit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "stepsize",
           "type": "float",
           "default": 0.05,
           "required": true,
-          "doctxt": "\nStep size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted.\n"
+          "doctxt": "Step size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "iterations",
           "type": "int",
           "default": 10,
           "required": true,
-          "doctxt": "\nNumber of iterations for each gradient descent run.\n"
+          "doctxt": "Number of iterations for each gradient descent run."
         },
         {
           "name": "random_start",
           "type": "bool",
           "default": false,
           "required": true,
-          "doctxt": "\nStart the attack from a random point rather than from the original input.\n"
+          "doctxt": "Start the attack from a random point rather than from the original input."
         },
         {
           "name": "return_early",
           "type": "bool",
           "default": true,
           "required": true,
-          "doctxt": "\nWhether an individual gradient descent run should stop as soon as an adversarial is found.\n"
+          "doctxt": "Whether an individual gradient descent run should stop as soon as an adversarial is found."
         }
       ]
     },
@@ -70,7 +70,7 @@
           "extension": "jpg"
         }
       ],
-      "doctxt": "The L2 version of the Carlini & Wagner attack.\n\nThis attack is described in [1]. This implementation is based on the reference implementation by Carlini [2]. For bounds \u2260 (0, 1), it differs from [2] because we normalize the squared L2 loss with the bounds.\n\nReferences\n[1]\tNicholas Carlini, David Wagner: \u201cTowards Evaluating the Robustness of Neural Networks\u201d, https://arxiv.org/abs/1608.04644\n[2]\t(1, 2) https://github.com/carlini/nn_robust_attacks",
+      "doctxt": "The L2 version of the Carlini & Wagner attack.\n\nThis attack is described in [1]. This implementation is based on the reference implementation by Carlini [2]. For bounds != (0, 1), it differs from [2] because we normalize the squared L2 loss with the bounds.\n\nReferences\n[1] Nicholas Carlini, David Wagner: \"Towards Evaluating the Robustness of Neural Networks\", https://arxiv.org/abs/1608.04644\n[2] (1,2) https://github.com/carlini/nn_robust_attacks",
       "options": [
         {
           "name": "model",
@@ -87,38 +87,42 @@
           "type": "int",
           "default": 5,
           "required": true,
-          "doctxt": "\nThe number of steps for the binary search used to find the optimal tradeoff-constant between distance and confidence.\n"
+          "doctxt": "The number of steps for the binary search used to find the optimal tradeoff-constant between distance and confidence."
         },
         {
           "name": "max_iterations",
           "type": "int",
           "default": 1000,
           "required": true,
-          "doctxt": "\nThe maximum number of iterations. Larger values are more accurate; setting it too small will require a large learning rate and will produce poor results.\n"
+          "doctxt": "The maximum number of iterations. Larger values are more accurate; setting it too small will require a large learning rate and will produce poor results."
         },
         {
           "name": "confidence",
           "type": "int",
           "default": 0,
-          "required": true
+          "required": true,
+          "doctxt": "Confidence of adversarial examples: a higher value produces adversarials that are further away, but more strongly classified as adversarial."
         },
         {
           "name": "learning_rate",
           "type": "float",
           "default": 0.005,
-          "required": true
+          "required": true,
+          "doctxt": "The learning rate for the attack algorithm. Smaller values produce better results but take longer to converge."
         },
         {
           "name": "initial_const",
           "type": "float",
           "default": 0.01,
-          "required": true
+          "required": true,
+          "doctxt": "The initial tradeoff-constant to use to tune the relative importance of distance and confidence. If binary_search_steps is large, the initial constant is not important."
         },
         {
           "name": "abort_early",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "If True, Adam will be aborted if the loss hasn't decreased for some time (a tenth of max_iterations)."
         }
       ]
     },
@@ -129,6 +133,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Simple and close to optimal gradient-based adversarial attack.",
       "options": [
         {
           "name": "model",
@@ -144,13 +149,15 @@
           "name": "steps",
           "type": "int",
           "default": 100,
-          "required": true
+          "required": true,
+          "doctxt": "Maximum number of steps to perform."
         },
         {
           "name": "subsample",
           "type": "int",
           "default": 10,
-          "required": true
+          "required": true,
+          "doctxt": "Limit on the number of the most likely classes that should be considered. A small value is usually sufficient and much faster."
         }
       ]
     },
@@ -161,6 +168,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Simple and close to optimal gradient-based adversarial attack.",
       "options": [
         {
           "name": "model",
@@ -176,13 +184,15 @@
           "name": "steps",
           "type": "int",
           "default": 100,
-          "required": true
+          "required": true,
+          "doctxt": "Maximum number of steps to perform."
         },
         {
           "name": "subsample",
           "type": "int",
           "default": 10,
-          "required": true
+          "required": true,
+          "doctxt": "Limit on the number of the most likely classes that should be considered. A small value is usually sufficient and much faster."
         }
       ]
     },
@@ -193,6 +203,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "The Basic Iterative Method introduced in [1].\nThis attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.\nReferences\n[1]\tAlexey Kurakin, Ian Goodfellow, Samy Bengio, \"Adversarial examples in the physical world\", https://arxiv.org/abs/1607.02533",
       "options": [
         {
           "name": "model",
@@ -225,6 +236,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Like GradientSignAttack but with several steps for each epsilon.",
       "options": [
         {
           "name": "model",
@@ -240,19 +252,22 @@
           "name": "epsilons",
           "type": "int",
           "default": 100,
-          "required": true
+          "required": true,
+          "doctxt": "Either Iterable of step sizes in the direction of the sign of the gradient or number of step sizes between 0 and max_epsilon that should be tried."
         },
         {
           "name": "max_epsilon",
           "type": "int",
           "default": 1,
-          "required": true
+          "required": true,
+          "doctxt": "Largest step size if epsilons is not an iterable."
         },
         {
           "name": "steps",
           "type": "int",
           "default": 10,
-          "required": true
+          "required": true,
+          "doctxt": "Number of iterations to run."
         }
       ]
     },
@@ -263,6 +278,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Perturbs the input with the gradient of the loss w.r.t. the input, gradually increasing the magnitude until the input is misclassified.\nDoes not do anything if the model does not have a gradient.",
       "options": [
         {
           "name": "model",
@@ -301,6 +317,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "The Projected Gradient Attack introduced in [1] with random start.\n\nWhen used without a random start, this attack is also known as Basic Iterative Method (BIM) or FGSM^k.\n\nReferences\n[1]\tAleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu,\n\"Towards Deep Learning Models Resistant to Adversarial Attacks\", https://arxiv.org/abs/1706.06083",
       "options": [
         {
           "name": "model",
@@ -316,37 +333,43 @@
           "name": "binary_search",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "Whether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized. Can also be an integer, specifying the number of binary search steps (default 20)."
         },
         {
           "name": "epsilon",
           "type": "float",
           "default": 0.3,
-          "required": true
+          "required": true,
+          "doctxt": "Limit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "stepsize",
           "type": "float",
           "default": 0.01,
-          "required": true
+          "required": true,
+          "doctxt": "Step size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "iterations",
           "type": "int",
           "default": 40,
-          "required": true
+          "required": true,
+          "doctxt": "Number of iterations for each gradient descent run."
         },
         {
           "name": "random_start",
           "type": "bool",
           "default": false,
-          "required": true
+          "required": true,
+          "doctxt": "Start the attack from a random point rather than from the original input."
         },
         {
           "name": "return_early",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "Whether an individual gradient descent run should stop as soon as an adversarial is found."
         }
       ]
     },
@@ -357,6 +380,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "The Random Projected Gradient Descent introduced in [1] with random start.\n\nReferences\n[1]\tAleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu,\n\"Towards Deep Learning Models Resistant to Adversarial Attacks\", https://arxiv.org/abs/1706.06083",
       "options": [
         {
           "name": "model",
@@ -372,37 +396,43 @@
           "name": "binary_search",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "Whether to perform a binary search over epsilon and stepsize, keeping their ratio constant and using their values to start the search. If False, hyperparameters are not optimized. Can also be an integer, specifying the number of binary search steps (default 20)."
         },
         {
           "name": "epsilon",
           "type": "float",
           "default": 0.3,
-          "required": true
+          "required": true,
+          "doctxt": "Limit on the perturbation size; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "stepsize",
           "type": "float",
           "default": 0.01,
-          "required": true
+          "required": true,
+          "doctxt": "Step size for gradient descent; if binary_search is True, this value is only for initialization and automatically adapted."
         },
         {
           "name": "iterations",
           "type": "int",
           "default": 40,
-          "required": true
+          "required": true,
+          "doctxt": "Number of iterations for each gradient descent run."
         },
         {
           "name": "random_start",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "Start the attack from a random point rather than from the original input."
         },
         {
           "name": "return_early",
           "type": "bool",
           "default": true,
-          "required": true
+          "required": true,
+          "doctxt": "Whether an individual gradient descent run should stop as soon as an adversarial is found."
         }
       ]
     },
@@ -413,6 +443,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Increases the amount of salt and pepper noise until the input is misclassified.",
       "options": [
         {
           "name": "model",
@@ -428,13 +459,15 @@
           "name": "epsilons",
           "type": "int",
           "default": 100,
-          "required": true
+          "required": true,
+          "doctxt": "Number of steps to try between probability 0 and 1."
         },
         {
           "name": "repetitions",
           "type": "int",
           "default": 10,
-          "required": true
+          "required": true,
+          "doctxt": "Specifies how often the attack will be repeated."
         }
       ]
     },
@@ -445,6 +478,7 @@
           "extension": "jpg"
         }
       ],
+      "doctxt": "Perturbs just a single pixel and sets it to the min or max.",
       "options": [
         {
           "name": "model",
@@ -460,7 +494,8 @@
           "name": "max_pixels",
           "type": "int",
           "default": 1000,
-          "required": true
+          "required": true,
+          "doctxt": "Maximum number of pixels to try."
         }
       ]
     }

@@ -37,9 +37,9 @@ def _get_signature(attack_class):
 
 
 def _process_doctxt(doctxt):
-  doctxt = doctxt.strip()
-  doctxt = doctxt.strip('\n')
-  doctxt = doctxt.strip()
+  for _ in range(4):
+    doctxt = doctxt.strip()
+    doctxt = doctxt.strip('\n')
   return doctxt
 
 
@@ -100,8 +100,8 @@ def main():
 
           if (name in adocs
               and option_name in adocs[name]['parameters']):
-                opt[DOCTXT] = \
-                  adocs[name]['parameters'][option_name][DOCTXT]
+                opt[DOCTXT] = _process_doctxt(
+                  adocs[name]['parameters'][option_name][DOCTXT])
 
           options.append(opt)
 
