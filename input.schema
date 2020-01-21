@@ -14,10 +14,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to use for classification."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         }
       ]
     },
@@ -35,10 +42,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "binary_search",
@@ -98,10 +112,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "binary_search_steps",
@@ -161,10 +182,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "steps",
@@ -196,10 +224,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "epsilons",
@@ -231,10 +266,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "epsilons",
@@ -273,10 +315,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "binary_search",
@@ -336,10 +385,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "epsilons",
@@ -371,10 +427,17 @@
           "type": "enum",
           "values": [
             "vgg16",
-            "resnet18"
+            "resnet18",
+            "custom"
           ],
           "required": true,
           "doctxt": "Pre-trained model to be attacked."
+        },
+        {
+          "name": "custom_model_url",
+          "type": "str",
+          "required": false,
+          "doctxt": "Git URL for a foolbox-zoo compatible repository. Image will be of size 224x224 normalized to [0, 1]. This option is used when \"model\" is set to \"custom\"."
         },
         {
           "name": "max_pixels",

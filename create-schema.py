@@ -6,7 +6,7 @@ from foolbox import attacks
 from foolbox.attacks.base import Attack
 
 from foolboxdocs import docs
-from models import ALLOWED_MODELS
+from models import ALLOWED_MODELS, CUSTOM_MODEL
 
 ALLOWED_OPTION_TYPES = ['str', 'float', 'int', 'bool']
 ALLOWED_ATTACKS = [
@@ -41,6 +41,16 @@ def _process_doctxt(doctxt):
   return doctxt
 
 
+def _get_custom_model_option():
+  return {
+    'name': 'custom_model_url',
+    'type': 'str',
+    'required': False,
+    'doctxt': ('Git URL for a foolbox-zoo compatible repository. '
+               'Image will be of size 224x224 normalized to [0, 1]. '
+               'This option is used when "model" is set to "%s".' % CUSTOM_MODEL)}
+
+
 def _get_classify_schema():
   name = 'Classify'
 
@@ -49,12 +59,14 @@ def _get_classify_schema():
     'extensions': [
       {'extension': 'jpg'}],
     'doctxt': 'This simply classifies the image using the specified model, no attack here.',
-    'options': [{
+    'options': [
+      {
         'name': 'model',
         'type': 'enum',
-        'values': ALLOWED_MODELS,
+        'values': ALLOWED_MODELS + [CUSTOM_MODEL],
         'required': True,
-        'doctxt': 'Pre-trained model to use for classification.'}]}
+        'doctxt': 'Pre-trained model to use for classification.'
+      }, _get_custom_model_option()]}
 
   fn_output_schema = {
     'name': name,
@@ -110,9 +122,10 @@ def main():
       options.append({
         'name': 'model',
         'type': 'enum',
-        'values': ALLOWED_MODELS,
+        'values': ALLOWED_MODELS + [CUSTOM_MODEL],
         'required': True,
         'doctxt': 'Pre-trained model to be attacked.'})
+      options.append(_get_custom_model_option())
 
       for (option_name,
            option_type,
