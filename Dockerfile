@@ -4,10 +4,12 @@ VOLUME /mnt/input
 VOLUME /mnt/output
 
 # Install python dependencies
-RUN pip install Pillow numpy foolbox==1.8.0
+COPY requirements.txt /
+RUN pip install --ignore-installed \
+        -r /requirements.txt
 
 # Download pretrained weights
-ADD models.py /
+COPY models.py /
 RUN python /models.py
 
 COPY . /app
