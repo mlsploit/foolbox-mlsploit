@@ -1,13 +1,20 @@
 import os
 
-from mlsploit_local import Job
 import numpy as np
 from PIL import Image
 import foolbox
 import inspect
 
+from mlsploit_local import Job
+
+from data import build_image_dataset, get_or_create_dataset, recreate_image
 from models import CUSTOM_MODEL, load_foolbox_zoo_model, load_pretrained_model
 from utils.imagenet import get_label_for_imagenet_class
+
+
+ATTACK_CLASSES = {
+    name: attack_class for name, attack_class in inspect.getmembers(foolbox.attacks)
+}
 
 
 def get_fmodel(attack_options):
@@ -30,61 +37,76 @@ def main():
     # load and verify all input parameters
     Job.initialize()
 
-    input_file_paths = list(map(lambda f: f.path, Job.input_files))
-    input_file_path = input_file_paths[0]
-    input_file_name = os.path.basename(input_file_path)
-
     attack_name = Job.function
     attack_options = dict(Job.options)
 
-    image_size = 224
-    original_image = Image.open(input_file_path)
-    image = original_image.resize((image_size, image_size))
-    image = np.array(image, dtype=np.float32)
-    image = image.transpose([2, 0, 1])
-    image = image / 255.0
-
     fmodel = get_fmodel(attack_options)
 
-    label = np.argmax(fmodel.predictions(image))
-    print("Original prediction:", get_label_for_imagenet_class(label))
+    input_file_paths = list(map(lambda f: f.path, Job.input_files))
+    input_dataset, is_temp_dataset = get_or_create_dataset(input_file_paths)
+
+    output_dataset = build_image_dataset(
+        Job.make_output_filepath(input_dataset.path.name)
+    )
+
+    original_predictions = dict()
+    for item in input_dataset:
+        original_predictions[item.name] = np.argmax(fmodel.predictions(item.data))
+
+        print(
+            "Original prediction for %s: %s"
+            % (item.name, get_label_for_imagenet_class(original_predictions[item.name]))
+        )
 
     if attack_name == "Classify":
-        label = get_label_for_imagenet_class(label)
-
-        output_image = original_image
-        output_file_path = Job.make_output_filepath(input_file_name)
-        output_image.save(output_file_path)
-        Job.add_output_file(
-            output_file_path,
-            is_modified=True,
-            tags={"label": label, "mlsploit-visualize": "image"},
-        )
-        Job.commit_output()
+        for item in input_dataset:
+            output_dataset.add_item(
+                name=item.name,
+                data=item.data,
+                label=item.label,
+                prediction=original_predictions[item.name],
+            )
 
     else:
-        for name, item in inspect.getmembers(foolbox.attacks):
-            if name == Job.function:
-                attack_init = item
-                attack = attack_init(fmodel)
-                adversarial = attack(image, label, **attack_options)
+        attack_class = ATTACK_CLASSES[attack_name]
+        attack = attack_class(fmodel)
 
-                label_attack = np.argmax(fmodel.predictions(adversarial))
-                label_attack = get_label_for_imagenet_class(label_attack)
-                print("Prediction after attack:", label_attack)
+        for item in input_dataset:
+            adversarial_image = attack(
+                item.data, original_predictions[item.name], **attack_options
+            )
 
-                output_image = np.uint8(adversarial * 255.0)
-                output_image = output_image.transpose([1, 2, 0])
-                output_image = Image.fromarray(output_image)
+            attack_prediction = np.argmax(fmodel.predictions(adversarial_image))
 
-                output_file_path = Job.make_output_filepath(input_file_name)
-                output_image.save(output_file_path)
-                Job.add_output_file(
-                    output_file_path,
-                    is_modified=True,
-                    tags={"label": label_attack, "mlsploit-visualize": "image"},
-                )
-                Job.commit_output()
+            output_dataset.add_item(
+                name=item.name,
+                data=adversarial_image,
+                label=item.label,
+                prediction=attack_prediction,
+            )
+
+            print(
+                "Prediction after attack for %s: %s"
+                % (item.name, get_label_for_imagenet_class(attack_prediction))
+            )
+
+    output_item = output_dataset[0]
+    output_image = recreate_image(output_item.data)
+    output_image_label = get_label_for_imagenet_class(output_item.prediction)
+    output_image_path = Job.make_output_filepath(output_item.name)
+    output_image.save(output_image_path)
+
+    Job.add_output_file(str(output_dataset.path), is_extra=True)
+    Job.add_output_file(
+        output_image_path,
+        is_modified=True,
+        tags={"label": output_image_label, "mlsploit-visualize": "image"},
+    )
+
+    Job.commit_output()
+
+    if is_temp_dataset:
+        os.remove(input_dataset.path)
 
 
 if __name__ == "__main__":

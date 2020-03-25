@@ -13,7 +13,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "BasicIterativeMethod",
@@ -28,7 +28,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "CarliniWagnerL2Attack",
@@ -43,7 +43,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "DeepFoolL2Attack",
@@ -58,7 +58,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "FGSM",
@@ -73,7 +73,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "IterativeGradientSignAttack",
@@ -88,7 +88,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "ProjectedGradientDescent",
@@ -103,7 +103,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "SaltAndPepperNoiseAttack",
@@ -118,7 +118,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     },
     {
       "name": "SinglePixelAttack",
@@ -133,7 +133,7 @@
         }
       ],
       "has_modified_files": true,
-      "has_extra_files": false
+      "has_extra_files": true
     }
   ]
 }

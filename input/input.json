@@ -3,7 +3,7 @@
   "options": {
     "model": "vgg16",
     "epsilons": 100,
-    "max_epsilon": 16
+    "max_epsilon": 0.5
   },
   "num_files": 1,
   "files": ["example.jpg"],

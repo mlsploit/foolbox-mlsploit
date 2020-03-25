@@ -60,7 +60,7 @@ def _get_classify_schema():
 
     fn_input_schema = {
         "name": name,
-        "extensions": [{"extension": "jpg"}],
+        "extensions": [{"extension": "jpg"}, {"extension": "db"}],
         "doctxt": "This simply classifies the image using the specified model, no attack here.",
         "options": [
             {
@@ -81,7 +81,7 @@ def _get_classify_schema():
             {"name": "label", "type": "str"},
         ],
         "has_modified_files": True,
-        "has_extra_files": False,
+        "has_extra_files": True,
     }
 
     return fn_input_schema, fn_output_schema
@@ -111,7 +111,10 @@ def main():
             and name in ALLOWED_ATTACKS
         ):
 
-            fn_input_schema = {"name": name, "extensions": [{"extension": "jpg"}]}
+            fn_input_schema = {
+                "name": name,
+                "extensions": [{"extension": "jpg"}, {"extension": "db"}],
+            }
 
             fn_output_schema = {
                 "name": name,
@@ -120,7 +123,7 @@ def main():
                     {"name": "label", "type": "str"},
                 ],
                 "has_modified_files": True,
-                "has_extra_files": False,
+                "has_extra_files": True,
             }
 
             if name in adocs and DOCTXT in adocs[name]:

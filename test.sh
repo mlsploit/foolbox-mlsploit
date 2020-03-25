@@ -4,6 +4,8 @@ MODULENAME="foolbox"
 
 docker build -t ${MODULENAME} .
 
+yes | rm output/MLSPLOIT.db
+
 docker run \
     -v "$(pwd)/input":/mnt/input \
     -v "$(pwd)/output":/mnt/output \

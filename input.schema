@@ -5,6 +5,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "This simply classifies the image using the specified model, no attack here.",
@@ -33,6 +36,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "The Basic Iterative Method introduced in [1].\n\nThis attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.\n\nReferences\n[1] Alexey Kurakin, Ian Goodfellow, Samy Bengio, \"Adversarial examples in the physical world\", https://arxiv.org/abs/1607.02533",
@@ -103,6 +109,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "The L2 version of the Carlini & Wagner attack.\n\nThis attack is described in [1]. This implementation is based on the reference implementation by Carlini [2]. For bounds != (0, 1), it differs from [2] because we normalize the squared L2 loss with the bounds.\n\nReferences\n[1] Nicholas Carlini, David Wagner: \"Towards Evaluating the Robustness of Neural Networks\", https://arxiv.org/abs/1608.04644\n[2] (1,2) https://github.com/carlini/nn_robust_attacks",
@@ -173,6 +182,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "Simple and close to optimal gradient-based adversarial attack.",
@@ -215,6 +227,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "Adds the sign of the gradient to the input, gradually increasing the magnitude until the input is misclassified. This attack is often referred to as Fast Gradient Sign Method and was introduced in [1].\n\nDoes not do anything if the model does not have a gradient.\n\nReferences\n[1]\tIan J. Goodfellow, Jonathon Shlens, Christian Szegedy, \u201cExplaining and Harnessing Adversarial Examples\u201d, https://arxiv.org/abs/1412.6572",
@@ -257,6 +272,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "Like GradientSignAttack but with several steps for each epsilon.",
@@ -306,6 +324,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "The Projected Gradient Attack introduced in [1] with random start.\n\nWhen used without a random start, this attack is also known as Basic Iterative Method (BIM) or FGSM^k.\n\nReferences\n[1]\tAleksander Madry, Aleksandar Makelov, Ludwig Schmidt, Dimitris Tsipras, Adrian Vladu,\n\"Towards Deep Learning Models Resistant to Adversarial Attacks\", https://arxiv.org/abs/1706.06083",
@@ -376,6 +397,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "Increases the amount of salt and pepper noise until the input is misclassified.",
@@ -418,6 +442,9 @@
       "extensions": [
         {
           "extension": "jpg"
+        },
+        {
+          "extension": "db"
         }
       ],
       "doctxt": "Perturbs just a single pixel and sets it to the min or max.",
