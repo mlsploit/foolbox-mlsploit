@@ -1,10 +1,12 @@
 from pathlib import Path
 from tempfile import mkdtemp
+from typing import Iterable, Tuple
 
 import numpy as np
 from PIL import Image
 
 from mlsploit.dataset import Dataset
+from mlsploit.paths import FilepathType
 
 
 IMG_WIDTH = 224
@@ -12,7 +14,7 @@ IMG_HEIGHT = 224
 IMG_DTYPE = np.float32
 
 
-def build_image_dataset(dataset_path):
+def build_image_dataset(dataset_path: FilepathType) -> Dataset:
     img_shape = (3, IMG_HEIGHT, IMG_WIDTH)
 
     return (
@@ -33,24 +35,30 @@ def build_image_dataset(dataset_path):
     )
 
 
-def load_and_process_image(image_path):
-    image = Image.open(image_path)
+def process_image(image: Image) -> np.ndarray:
     image = image.resize((IMG_WIDTH, IMG_HEIGHT))
     image = np.array(image, dtype=IMG_DTYPE)
     image = image.transpose([2, 0, 1])
     image = image / 255.0
-
     return image
 
 
-def recreate_image(data):
+def load_and_process_image(image_path: FilepathType) -> np.ndarray:
+    image = Image.open(image_path)
+    image = process_image(image)
+    return image
+
+
+def recreate_image(data: np.ndarray) -> Image:
     image = np.uint8(data * 255.0)
     image = image.transpose([1, 2, 0])
     image = Image.fromarray(image)
     return image
 
 
-def get_or_create_dataset(input_file_paths):
+def get_or_create_dataset(
+    input_file_paths: Iterable[FilepathType],
+) -> Tuple[Dataset, bool]:
 
     # return dataset if found in given input files
     for input_file_path in map(Path, input_file_paths):
