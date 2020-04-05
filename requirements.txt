@@ -1,4 +1,4 @@
-git+https://github.com/mlsploit/mlsploit-py.git@5f9e668772ff5f88c37e19075d3ae666ac8aab58
 foolbox==1.8.0
+mlsploit-py==0.1.0
 Pillow
 torchvision

@@ -1,11 +1,11 @@
-import json
-
-
 docs = {}
 docs["tagline"] = "Fool neural networks!"
 docs[
     "doctxt"
 ] = "Foolbox is a Python toolbox to create adversarial examples that fool neural networks."
+docs[
+    "icon_url"
+] = "https://github.com/mlsploit/foolbox-mlsploit/raw/master/static/module-icon.png"
 docs["attacks"] = {}
 
 
@@ -17,7 +17,7 @@ docs["attacks"]["BasicIterativeMethod"][
 ] = """
 The Basic Iterative Method introduced in [1].
 
-This attack is also known as Projected Gradient Descent (PGD) (without random start) or FGMS^k.
+This attack is also known as Projected Gradient Descent (PGD) (without random start) or FGSM^k.
 
 References
 [1] Alexey Kurakin, Ian Goodfellow, Samy Bengio, "Adversarial examples in the physical world", https://arxiv.org/abs/1607.02533
@@ -429,4 +429,6 @@ Maximum number of pixels to try.
 ####################################################################################################
 
 if __name__ == "__main__":
+    import json
+
     print(json.dumps(docs))

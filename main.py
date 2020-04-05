@@ -5,9 +5,10 @@ from PIL import Image
 import foolbox
 import inspect
 
-from mlsploit_local import Job
+from mlsploit import Job
+from mlsploit.dataset.datasets import ImageClassificationDatasetWithPrediction
 
-from data import build_image_dataset, get_or_create_dataset, recreate_image
+from data import get_or_create_dataset, recreate_image
 from models import CUSTOM_MODEL, load_foolbox_zoo_model, load_pretrained_model
 from utils.imagenet import get_label_for_imagenet_class
 
@@ -37,71 +38,77 @@ def main():
     # load and verify all input parameters
     Job.initialize()
 
-    attack_name = Job.function
-    attack_options = dict(Job.options)
+    fn_name = Job.function_name
+    fn_options = Job.options._asdict()
 
-    fmodel = get_fmodel(attack_options)
+    fmodel = get_fmodel(fn_options)
 
-    input_file_paths = list(map(lambda f: f.path, Job.input_files))
+    input_file_paths = list(map(lambda f: f.path, Job.input_file_items))
     input_dataset, is_temp_dataset = get_or_create_dataset(input_file_paths)
 
-    output_dataset = build_image_dataset(
-        Job.make_output_filepath(input_dataset.path.name)
+    output_dataset_file_item = Job.reserve_output_file_item(
+        input_dataset.path.name, is_new_file=True
+    )
+    output_dataset = ImageClassificationDatasetWithPrediction.initialize(
+        output_dataset_file_item.path, module="foolbox"
     )
 
     original_predictions = dict()
     for item in input_dataset:
-        original_predictions[item.name] = np.argmax(fmodel.predictions(item.data))
+        image = np.array(item.image, dtype=np.float32)
+        original_predictions[item.filename] = np.argmax(fmodel.predictions(image))
 
         print(
             "Original prediction for %s: %s"
-            % (item.name, get_label_for_imagenet_class(original_predictions[item.name]))
+            % (
+                item.filename,
+                get_label_for_imagenet_class(original_predictions[item.filename]),
+            )
         )
 
-    if attack_name == "Classify":
+    if fn_name == "Classify":
         for item in input_dataset:
             output_dataset.add_item(
-                name=item.name,
-                data=item.data,
+                filename=item.filename,
+                image=item.image,
                 label=item.label,
-                prediction=original_predictions[item.name],
+                prediction=original_predictions[item.filename],
             )
 
     else:
-        attack_class = ATTACK_CLASSES[attack_name]
+        attack_class = ATTACK_CLASSES[fn_name]
         attack = attack_class(fmodel)
 
         for item in input_dataset:
+            image = np.array(item.image, dtype=np.float32)
             adversarial_image = attack(
-                item.data, original_predictions[item.name], **attack_options
+                image, original_predictions[item.filename], **fn_options
             )
 
             attack_prediction = np.argmax(fmodel.predictions(adversarial_image))
 
             output_dataset.add_item(
-                name=item.name,
-                data=adversarial_image,
+                filename=item.filename,
+                image=adversarial_image,
                 label=item.label,
                 prediction=attack_prediction,
             )
 
             print(
                 "Prediction after attack for %s: %s"
-                % (item.name, get_label_for_imagenet_class(attack_prediction))
+                % (item.filename, get_label_for_imagenet_class(attack_prediction))
             )
 
     output_item = output_dataset[0]
-    output_image = recreate_image(output_item.data)
+    output_image = recreate_image(output_item.image)
     output_image_label = get_label_for_imagenet_class(output_item.prediction)
-    output_image_path = Job.make_output_filepath(output_item.name)
-    output_image.save(output_image_path)
 
-    Job.add_output_file(str(output_dataset.path), is_extra=True)
-    Job.add_output_file(
-        output_image_path,
-        is_modified=True,
-        tags={"label": output_image_label, "mlsploit-visualize": "image"},
+    output_image_file_item = Job.reserve_output_file_item(
+        output_item.filename, is_modified_file=True,
     )
+    output_image.save(output_image_file_item.path)
+    output_image_file_item.add_tag(name="visualize", value="image")
+    output_image_file_item.add_tag(name="label", value=output_image_label)
 
     Job.commit_output()
 

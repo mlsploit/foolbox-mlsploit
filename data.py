@@ -5,34 +5,13 @@ from typing import Iterable, Tuple
 import numpy as np
 from PIL import Image
 
-from mlsploit.dataset import Dataset
+from mlsploit.dataset.datasets import ImageClassificationDataset
 from mlsploit.paths import FilepathType
 
 
 IMG_WIDTH = 224
 IMG_HEIGHT = 224
-IMG_DTYPE = np.float32
-
-
-def build_image_dataset(dataset_path: FilepathType) -> Dataset:
-    img_shape = (3, IMG_HEIGHT, IMG_WIDTH)
-
-    return (
-        Dataset.build(dataset_path)
-        .with_metadata(
-            bounds=[0, 1],
-            color_mode="RGB",
-            channels_first=True,
-            img_width=IMG_WIDTH,
-            img_height=IMG_HEIGHT,
-            preprocessing=[0, 1],
-        )
-        .add_item_attr(name="name", shape=None, dtype="str",)
-        .add_item_attr(name="data", shape=img_shape, dtype=IMG_DTYPE)
-        .add_item_attr(name="label", shape=None, dtype=int)
-        .add_item_attr(name="prediction", shape=None, dtype=int)
-        .conclude_build()
-    )
+IMG_DTYPE = np.double
 
 
 def process_image(image: Image) -> np.ndarray:
@@ -58,20 +37,22 @@ def recreate_image(data: np.ndarray) -> Image:
 
 def get_or_create_dataset(
     input_file_paths: Iterable[FilepathType],
-) -> Tuple[Dataset, bool]:
+) -> Tuple[ImageClassificationDataset, bool]:
+
+    dataset_filename = ImageClassificationDataset.recommended_filename
 
     # return dataset if found in given input files
     for input_file_path in map(Path, input_file_paths):
-        if input_file_path.name == Dataset.recommended_filename:
-            return Dataset(input_file_path), False
+        if input_file_path.name == dataset_filename:
+            return ImageClassificationDataset(input_file_path), False
 
     # no dataset found, create a new dataset which contains the given input files
-    dataset = build_image_dataset(
-        Path(mkdtemp(prefix="foolbox-")) / Dataset.recommended_filename
+    dataset = ImageClassificationDataset.initialize(
+        Path(mkdtemp(prefix="foolbox-")) / dataset_filename, module="foolbox",
     )
 
     for input_file_path in map(Path, input_file_paths):
         image = load_and_process_image(input_file_path)
-        dataset.add_item(name=input_file_path.name, data=image, label=-1, prediction=-1)
+        dataset.add_item(filename=input_file_path.name, image=image, label=-1)
 
     return dataset, True
