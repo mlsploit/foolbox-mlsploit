@@ -1,4 +1,4 @@
 foolbox==1.8.0
-mlsploit-py==0.1.0
+mlsploit-py==0.1.2
 Pillow
 torchvision
